@@ -3,7 +3,6 @@ import bcrypt from 'bcryptjs';
 import prisma from '../utils/prisma';
 import { AuthRequest } from '../middlewares/auth.middleware';
 
-// Récupérer son propre profil
 export const getMonProfil = async (req: AuthRequest, res: Response) => {
   try {
     const user = await prisma.utilisateur.findUnique({
@@ -16,7 +15,6 @@ export const getMonProfil = async (req: AuthRequest, res: Response) => {
   }
 };
 
-// Modifier son email ou mot de passe
 export const modifierMonProfil = async (req: AuthRequest, res: Response) => {
   try {
     const { email, mot_de_passe, nom, prenom } = req.body;
@@ -39,7 +37,6 @@ export const modifierMonProfil = async (req: AuthRequest, res: Response) => {
   }
 };
 
-// ADMIN - Récupérer tous les utilisateurs
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
     const users = await prisma.utilisateur.findMany({
@@ -51,11 +48,9 @@ export const getAllUsers = async (req: Request, res: Response) => {
   }
 };
 
-// ADMIN - Désactiver ou activer un utilisateur
 export const toggleUserActif = async (req: Request, res: Response) => {
   try {
-    const idParam = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
-    const id = parseInt(idParam, 10);
+    const id = Number(req.params.id);
     const user = await prisma.utilisateur.findUnique({ where: { id } });
 
     if (!user) {
@@ -74,11 +69,9 @@ export const toggleUserActif = async (req: Request, res: Response) => {
   }
 };
 
-// ADMIN - Supprimer un utilisateur
 export const deleteUser = async (req: Request, res: Response) => {
   try {
-    const idParam = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
-    const id = parseInt(idParam, 10);
+    const id = Number(req.params.id);
     await prisma.utilisateur.delete({ where: { id } });
     res.status(200).json({ message: 'Utilisateur supprimé' });
   } catch (error) {
