@@ -3,6 +3,18 @@ import prisma from '../utils/prisma';
 import { AuthRequest } from '../middlewares/auth.middleware';
 
 //Récupère tout les commentaires
+export const getAllCommentaires = async (req: Request, res: Response) => {
+  try {
+    const commentaires = await prisma.commentaire.findMany({
+      include: { utilisateur: { select: { id: true, nom: true, prenom: true } } }
+    })
+    res.status(200).json(commentaires)
+  } catch {
+    res.status(500).json({ message: 'Erreur serveur' })
+  }
+}
+
+//Récupère les commentaires par rapport à un exercice
 export const getCommentairesByExercice = async (req: Request, res: Response) => {
   try {
     const exerciceId = Number(req.params.id);
@@ -16,7 +28,7 @@ export const getCommentairesByExercice = async (req: Request, res: Response) => 
   }
 };
 
-//Récupère un commentaire unique
+//Récupère les commentaires par rapport à un contenu
 export const getCommentairesByContenu = async (req: Request, res: Response) => {
   try {
     const contenuId = Number(req.params.id);
