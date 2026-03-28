@@ -8,6 +8,7 @@ import exerciceRoutes from './routes/exercice.routes';
 import contenuRoutes from './routes/contenu.routes';
 import commentaireRoutes from './routes/commentaire.routes';
 import likeRoutes from './routes/like.routes';
+import favoriRoutes from './routes/favori.routes';
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use('/api/exercices', exerciceRoutes);
 app.use('/api/contenus', contenuRoutes);
 app.use('/api/commentaires', commentaireRoutes);
 app.use('/api/likes', likeRoutes);
+app.use('/api/favoris', favoriRoutes);
 
 
 app.listen(PORT, () => {
