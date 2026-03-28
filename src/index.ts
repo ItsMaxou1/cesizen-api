@@ -6,6 +6,7 @@ import userRoutes from './routes/user.routes';
 import categorieRoutes from './routes/categorie.routes';
 import exerciceRoutes from './routes/exercice.routes';
 import contenuRoutes from './routes/contenu.routes';
+import commentaireRoutes from './routes/commentaire.routes';
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/categories', categorieRoutes);
 app.use('/api/exercices', exerciceRoutes);
 app.use('/api/contenus', contenuRoutes);
+app.use('/api/commentaires', commentaireRoutes);
 
 
 app.listen(PORT, () => {
