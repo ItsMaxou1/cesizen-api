@@ -78,3 +78,19 @@ export const deleteUser = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Erreur serveur' });
   }
 };
+
+// ADMIN
+
+//Créer un admin
+export const createAdmin = async (req: Request, res: Response) => {
+  try {
+    const { email, mot_de_passe, nom, prenom } = req.body
+    const hash = await bcrypt.hash(mot_de_passe, 10)
+    const user = await prisma.utilisateur.create({
+      data: { email, mot_de_passe: hash, nom, prenom, role: 'ADMIN' }
+    })
+    res.status(201).json(user)
+  } catch {
+    res.status(500).json({ message: 'Erreur serveur' })
+  }
+}
