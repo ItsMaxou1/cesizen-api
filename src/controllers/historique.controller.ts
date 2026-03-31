@@ -28,3 +28,18 @@ export const getMonHistorique = async (req: AuthRequest, res: Response) => {
     res.status(500).json({ message: 'Erreur serveur' });
   }
 };
+
+//Supprime tout l'historique d'un utilisateur
+export const deleteMonHistorique = async (req: AuthRequest, res: Response) => {
+  try {
+    const result = await prisma.historiqueExercice.deleteMany({
+    where: { utilisateurId: req.user!.id }
+  });
+    res.status(200).json({
+      message: 'Historique supprimé',
+      deletedCount: result.count
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Erreur serveur' });
+  }
+};
