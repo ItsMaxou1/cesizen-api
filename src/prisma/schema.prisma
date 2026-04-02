@@ -9,29 +9,29 @@ datasource db {
 }
 
 model Utilisateur {
-  id          Int      @id @default(autoincrement())
-  email       String   @unique
-  mot_de_passe String
-  nom         String
-  prenom      String
-  role        Role     @default(USER)
+  id            Int      @id @default(autoincrement())
+  email         String   @unique
+  mot_de_passe  String
+  nom           String
+  prenom        String
+  role          Role     @default(USER)
   date_creation DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  isActive    Boolean  @default(true)
+  updatedAt     DateTime @updatedAt
+  isActive      Boolean  @default(true)
 
-  commentaires    Commentaire[]
-  likes           Like[]
-  favoris         Favori[]
-  historiques     HistoriqueExercice[]
+  commentaires Commentaire[]
+  likes        Like[]
+  favoris      Favori[]
+  historiques  HistoriqueExercice[]
 }
 
 model Categorie {
-  id          Int      @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   nom         String
-  description String   @db.Text
+  description String @db.Text
 
-  exercices   ExerciceRespiration[]
-  contenus    ContenuInformation[]
+  exercices ExerciceRespiration[]
+  contenus  ContenuInformation[]
 }
 
 model ExerciceRespiration {
@@ -42,17 +42,18 @@ model ExerciceRespiration {
   inspiration    Int
   apnee          Int
   expiration     Int
+  type           String   @default("bulle")
   isActive       Boolean  @default(true)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
-  categorieId    Int
-  categorie      Categorie @relation(fields: [categorieId], references: [id])
+  categorieId Int
+  categorie   Categorie @relation(fields: [categorieId], references: [id])
 
-  commentaires   Commentaire[]
-  likes          Like[]
-  favoris        Favori[]
-  historiques    HistoriqueExercice[]
+  commentaires Commentaire[]
+  likes        Like[]
+  favoris      Favori[]
+  historiques  HistoriqueExercice[]
 }
 
 model ContenuInformation {
@@ -63,11 +64,11 @@ model ContenuInformation {
   updatedAt        DateTime @updatedAt
   isActive         Boolean  @default(true)
 
-  categorieId      Int
-  categorie        Categorie @relation(fields: [categorieId], references: [id])
+  categorieId Int
+  categorie   Categorie @relation(fields: [categorieId], references: [id])
 
-  commentaires     Commentaire[]
-  likes            Like[]
+  commentaires Commentaire[]
+  likes        Like[]
 }
 
 model Commentaire {
@@ -78,11 +79,11 @@ model Commentaire {
   utilisateurId Int
   utilisateur   Utilisateur @relation(fields: [utilisateurId], references: [id])
 
-  exerciceId    Int?
-  exercice      ExerciceRespiration? @relation(fields: [exerciceId], references: [id])
+  exerciceId Int?
+  exercice   ExerciceRespiration? @relation(fields: [exerciceId], references: [id])
 
-  contenuId     Int?
-  contenuInfo   ContenuInformation? @relation(fields: [contenuId], references: [id])
+  contenuId   Int?
+  contenuInfo ContenuInformation? @relation(fields: [contenuId], references: [id])
 }
 
 model Like {
@@ -92,11 +93,11 @@ model Like {
   utilisateurId Int
   utilisateur   Utilisateur @relation(fields: [utilisateurId], references: [id])
 
-  exerciceId    Int?
-  exercice      ExerciceRespiration? @relation(fields: [exerciceId], references: [id])
+  exerciceId Int?
+  exercice   ExerciceRespiration? @relation(fields: [exerciceId], references: [id])
 
-  contenuId     Int?
-  contenuInfo   ContenuInformation? @relation(fields: [contenuId], references: [id])
+  contenuId   Int?
+  contenuInfo ContenuInformation? @relation(fields: [contenuId], references: [id])
 }
 
 model Favori {
@@ -106,19 +107,19 @@ model Favori {
   utilisateurId Int
   utilisateur   Utilisateur @relation(fields: [utilisateurId], references: [id])
 
-  exerciceId    Int
-  exercice      ExerciceRespiration @relation(fields: [exerciceId], references: [id])
+  exerciceId Int
+  exercice   ExerciceRespiration @relation(fields: [exerciceId], references: [id])
 }
 
 model HistoriqueExercice {
   id               Int      @id @default(autoincrement())
   date_realisation DateTime @default(now())
 
-  utilisateurId    Int
-  utilisateur      Utilisateur @relation(fields: [utilisateurId], references: [id])
+  utilisateurId Int
+  utilisateur   Utilisateur @relation(fields: [utilisateurId], references: [id])
 
-  exerciceId       Int
-  exercice         ExerciceRespiration @relation(fields: [exerciceId], references: [id])
+  exerciceId Int
+  exercice   ExerciceRespiration @relation(fields: [exerciceId], references: [id])
 }
 
 enum Role {

@@ -35,9 +35,9 @@ export const getExerciceById = async (req: Request, res: Response) => {
 //Créer un exercice
 export const createExercice = async (req: Request, res: Response) => {
   try {
-    const { titre, description, duree_secondes, inspiration, apnee, expiration, categorieId } = req.body;
+    const { titre, description, duree_secondes, inspiration, apnee, expiration, categorieId, type } = req.body;
     const exercice = await prisma.exerciceRespiration.create({
-      data: { titre, description, duree_secondes, inspiration, apnee, expiration, categorieId }
+      data: { titre, description, duree_secondes, inspiration, apnee, expiration, categorieId, type }
     });
     res.status(201).json(exercice);
   } catch (error) {
@@ -49,10 +49,10 @@ export const createExercice = async (req: Request, res: Response) => {
 export const updateExercice = async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
-    const { titre, description, duree_secondes, inspiration, apnee, expiration, categorieId } = req.body;
+    const { titre, description, duree_secondes, inspiration, apnee, expiration, categorieId, type } = req.body;
     const exercice = await prisma.exerciceRespiration.update({
       where: { id },
-      data: { titre, description, duree_secondes, inspiration, apnee, expiration, categorieId }
+      data: { titre, description, duree_secondes, inspiration, apnee, expiration, categorieId, type }
     });
     res.status(200).json(exercice);
   } catch (error) {
