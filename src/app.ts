@@ -2,7 +2,6 @@
 // Cela permet aux tests d'importer l'app sans démarrer le serveur
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';
 import categorieRoutes from './routes/categorie.routes';
@@ -12,8 +11,6 @@ import commentaireRoutes from './routes/commentaire.routes';
 import likeRoutes from './routes/like.routes';
 import favoriRoutes from './routes/favori.routes';
 import historiqueRoutes from './routes/historique.routes';
-
-dotenv.config();
 
 const app = express();
 

@@ -4,17 +4,29 @@ API REST du projet **CESIZen**, une application de gestion du stress et du bien-
 
 Construite avec **Node.js**, **Express**, **TypeScript**, **Prisma** et **MySQL**.
 
+Campagne minimale avant toute livraison
+Avant chaque démonstration ou livraison, les étapes suivantes doivent être validées :
+
+    1. Ouvrir l'application mobile — vérifier l'affichage de l'accueil (exercices + contenus)
+    2. Ouvrir la liste des exercices — vérifier les filtres par catégorie
+    3. Lancer un exercice — vérifier l'animation (bulle ou barre selon le type)
+    4. Se connecter — vérifier l'accès au profil avec nom/prénom/email
+    5. Ajouter un exercice en favori — vérifier la présence dans le profil
+    6. Consulter un contenu informatif — vérifier les likes et commentaires
+    7. Se connecter au back-office admin — vérifier l'accès au dashboard
+    8. Se déconnecter depuis l'app mobile
+
 ---
 
 ## Présentation du projet
 
 CESIZen est composé de 3 projets :
 
-| Projet | Description | Lien |
-|--------|-------------|------|
-| **cesizen-api** (ce repo) | Backend REST | - |
-| **cesizen-web** | Interface admin (React) | [Repo](https://github.com/ItsMaxou1/cesizen-web) |
-| **cesizen-mobile** | Application mobile (Expo) | [Repo](https://github.com/ItsMaxou1/cesizen-mobile) |
+| Projet                    | Description               | Lien                                                |
+| ------------------------- | ------------------------- | --------------------------------------------------- |
+| **cesizen-api** (ce repo) | Backend REST              | -                                                   |
+| **cesizen-web**           | Interface admin (React)   | [Repo](https://github.com/ItsMaxou1/cesizen-web)    |
+| **cesizen-mobile**        | Application mobile (Expo) | [Repo](https://github.com/ItsMaxou1/cesizen-mobile) |
 
 > L'API doit être lancée en premier avant le web et le mobile.
 
@@ -82,6 +94,7 @@ npm run test:watch
 ```
 
 Les tests couvrent :
+
 - `auth.controller` — register, login (unitaires)
 - `exercice.controller` — CRUD exercices (unitaires)
 - `POST /api/auth/register` et `POST /api/auth/login` (fonctionnels HTTP)
@@ -106,22 +119,22 @@ cesizen-api/
 
 ## Routes principales
 
-| Méthode | Route | Auth | Description |
-|---------|-------|------|-------------|
-| POST | `/api/auth/register` | Non | Inscription |
-| POST | `/api/auth/login` | Non | Connexion |
-| GET | `/api/exercices` | Non | Liste des exercices actifs |
-| GET | `/api/exercices/:id` | Non | Détail d'un exercice |
-| POST | `/api/exercices` | Admin | Créer un exercice |
-| PUT | `/api/exercices/:id` | Admin | Modifier un exercice |
-| PATCH | `/api/exercices/:id/toggle` | Admin | Activer/désactiver |
-| DELETE | `/api/exercices/:id` | Admin | Supprimer |
-| GET | `/api/contenus` | Non | Liste des contenus |
-| GET | `/api/categories` | Non | Liste des catégories |
-| GET | `/api/favoris/mes-favoris` | User | Mes favoris |
-| POST | `/api/favoris` | User | Ajouter un favori |
-| GET | `/api/historique/mon-historique` | User | Mon historique |
-| POST | `/api/historique` | User | Enregistrer un exercice réalisé |
+| Méthode | Route                            | Auth  | Description                     |
+| ------- | -------------------------------- | ----- | ------------------------------- |
+| POST    | `/api/auth/register`             | Non   | Inscription                     |
+| POST    | `/api/auth/login`                | Non   | Connexion                       |
+| GET     | `/api/exercices`                 | Non   | Liste des exercices actifs      |
+| GET     | `/api/exercices/:id`             | Non   | Détail d'un exercice            |
+| POST    | `/api/exercices`                 | Admin | Créer un exercice               |
+| PUT     | `/api/exercices/:id`             | Admin | Modifier un exercice            |
+| PATCH   | `/api/exercices/:id/toggle`      | Admin | Activer/désactiver              |
+| DELETE  | `/api/exercices/:id`             | Admin | Supprimer                       |
+| GET     | `/api/contenus`                  | Non   | Liste des contenus              |
+| GET     | `/api/categories`                | Non   | Liste des catégories            |
+| GET     | `/api/favoris/mes-favoris`       | User  | Mes favoris                     |
+| POST    | `/api/favoris`                   | User  | Ajouter un favori               |
+| GET     | `/api/historique/mon-historique` | User  | Mon historique                  |
+| POST    | `/api/historique`                | User  | Enregistrer un exercice réalisé |
 
 ## Dépannage
 
